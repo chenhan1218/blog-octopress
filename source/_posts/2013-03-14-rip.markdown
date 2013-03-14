@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "RIP"
+title: "RIP, Google Reader"
 date: 2013-03-14 12:15
 comments: true
 categories: 
