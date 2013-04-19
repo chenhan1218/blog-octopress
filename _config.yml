@@ -2,9 +2,9 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://swem.github.com
-title: swem's Octopress Blog
-subtitle: A blogging framework for hackers.
+url: http://swem.github.io
+title: swem's tech talk
+subtitle: keep hacking.
 author: swem
 simple_search: http://google.com/search
 description:
