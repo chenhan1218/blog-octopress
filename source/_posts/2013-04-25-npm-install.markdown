@@ -9,12 +9,12 @@ NPM (Node Packaged Modules) 是 Node.js 裡很好用的模組安裝工具。從 
 
 1. 全域安裝，通常會把模組安裝在 /usr/local/lib/node_modules 的位置。
 ``` bash
-npm install -g express
+$ npm install -g express
 ``` 
 
 2. 專案資料夾內的安裝，
 ``` bash
-npm install express
+$ npm install express
 ``` 
 
 如何決定要用什麼方式來安裝呢。Node.js 提供了以下的原則：

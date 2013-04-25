@@ -20,7 +20,8 @@ Geek of open source software. Studied in Mathematics and Computer Science (Espec
 
 * [Translator](http://www.ted.com/profiles/1352721/translations) in TEDTalks community
 * Teaching assistant, CALCULUS (GENERAL MATHEMATICS), National Taiwan University (Fall 2008 & Spring 2009).
-* Teaching assistant, C Programming, National Taiwan University (Fall 2009).
+* Teaching assistant, Introduction to Computer Programming, National Taiwan University (Fall 2009).
+  * Excellent TA Award
 
 ## Publish
 
