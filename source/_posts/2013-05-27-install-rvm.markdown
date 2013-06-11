@@ -15,19 +15,19 @@ categories:
 
 ## 安裝 RVM, Ruby, Rails Gem 於 ~/.rvm
 
-1. 安裝 RVM
+1- 安裝 RVM
 ```
 # install rvm via internet.
 curl -L https://get.rvm.io | bash -s stable
 ```
 
-2. 用 RVM 來安裝 Ruby
+2- 用 RVM 來安裝 Ruby
 ```
 # install ruby 1.9.3 with rvm
 rvm install 1.9.3
 ```
 
-3. 用 Ruby 所附加的 gem 工具來安裝 Rails
+3- 用 Ruby 所附加的 gem 工具來安裝 Rails
 ```
 # install gem
 gem install rails
