@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Skype Supernode - swem's tech talk</title>
+  <meta name="author" content="swem">
+
+  
+  <meta name="description" content="今天讀了一些關於UDP hole punching，才知道原來VOIP這一類的技術，如何穿越NAT。 位在NAT後的A,B兩方要進行通話前，必須先透過一個STUN Server，取得對方於公開網路上的IP位址及PORT埠口，然後再進行NAT Traversal。 在Skype的實作中， &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swem.github.io/blog/2013/10/05/skype-supernode">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">swem's tech talk</a></h1>
+  
+    <h2>keep hacking.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:swem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Skype Supernode</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-05T00:00:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>今天讀了一些關於<a href="http://en.wikipedia.org/wiki/UDP_hole_punching">UDP hole punching</a>，才知道原來VOIP這一類的技術，如何穿越NAT。</p>
+
+<p>位在NAT後的A,B兩方要進行通話前，必須先透過一個STUN Server，取得對方於公開網路上的IP位址及PORT埠口，然後再進行<a href="http://en.wikipedia.org/wiki/NAT_traversal">NAT Traversal</a>。</p>
+
+<p>在Skype的實作中，本身具有Public IP位址的使用者，也可能擔任這個STUN server(Skype稱之為，Supernode)，分擔主伺服器的工作。因此，也需要耗用一些頻寬與運算效能。關於這點，台灣的網路追追追有訪問過Skype:</p>
+
+<blockquote><p>這個Super Node技術用在每種P2P的服務中，已經發展了8～9年，Skype是第一個將它運用於語音服務上，Skype挑選比較好的等級以及比較大的頻寬的用戶來當Super Node，並不會讓一個配備很差的電腦，還繼續拖垮它，而頻寬與資源佔用也只是一點點，集合眾多Super Node的力量完成。</p></blockquote>
+
+<p>不過在Microsoft買下Skype後，架構也有了調整，使用者將不再需要擔任STUN Server的角色，完全由微軟的伺服器來完成 Hole Punching 所需的資料交換。</p>
+
+<p>Ref:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/UDP_hole_punching">UDP hole punching</a></li>
+<li><a href="http://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a></li>
+<li><a href="http://www.cs.nccu.edu.tw/~lien/Writing/NGN/firewall.htm">VoIP 穿越防火牆的技術</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Supernode_(networking)">Supernode</a></li>
+<li><a href="http://rumor.nownews.com/2007/11/15/515-1728533.htm">網路追追追／用Skype到底安不安全？　PChome回應</a></li>
+<li><a href="http://arstechnica.com/business/2012/05/skype-replaces-p2p-supernodes-with-linux-boxes-hosted-by-microsoft/">Skype replaces P2P supernodes with Linux boxes hosted by Microsoft</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">swem</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-05T00:00:00+08:00" pubdate data-updated="true">Oct 5<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2013/10/05/skype-supernode/" data-via="" data-counturl="http://swem.github.io/blog/2013/10/05/skype-supernode/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/27/toeic-preparation/" title="Previous Post: TOEIC Preparation">&laquo; TOEIC Preparation</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/toeic-preparation/">TOEIC Preparation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - swem -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'swemsoctopressblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://swem.github.io/blog/2013/10/05/skype-supernode/';
+        var disqus_url = 'http://swem.github.io/blog/2013/10/05/skype-supernode/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

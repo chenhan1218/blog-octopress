@@ -1,0 +1,1049 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[swem's tech talk]]></title>
+  <link href="http://swem.github.io/atom.xml" rel="self"/>
+  <link href="http://swem.github.io/"/>
+  <updated>2013-10-05T21:22:38+08:00</updated>
+  <id>http://swem.github.io/</id>
+  <author>
+    <name><![CDATA[swem]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Skype Supernode]]></title>
+    <link href="http://swem.github.io/blog/2013/10/05/skype-supernode/"/>
+    <updated>2013-10-05T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/10/05/skype-supernode</id>
+    <content type="html"><![CDATA[<p>今天讀了一些關於<a href="http://en.wikipedia.org/wiki/UDP_hole_punching">UDP hole punching</a>，才知道原來VOIP這一類的技術，如何穿越NAT。</p>
+
+<p>位在NAT後的A,B兩方要進行通話前，必須先透過一個STUN Server，取得對方於公開網路上的IP位址及PORT埠口，然後再進行<a href="http://en.wikipedia.org/wiki/NAT_traversal">NAT Traversal</a>。</p>
+
+<p>在Skype的實作中，本身具有Public IP位址的使用者，也可能擔任這個STUN server(Skype稱之為，Supernode)，分擔主伺服器的工作。因此，也需要耗用一些頻寬與運算效能。關於這點，台灣的網路追追追有訪問過Skype:</p>
+
+<blockquote><p>這個Super Node技術用在每種P2P的服務中，已經發展了8～9年，Skype是第一個將它運用於語音服務上，Skype挑選比較好的等級以及比較大的頻寬的用戶來當Super Node，並不會讓一個配備很差的電腦，還繼續拖垮它，而頻寬與資源佔用也只是一點點，集合眾多Super Node的力量完成。</p></blockquote>
+
+<p>不過在Microsoft買下Skype後，架構也有了調整，使用者將不再需要擔任STUN Server的角色，完全由微軟的伺服器來完成 Hole Punching 所需的資料交換。</p>
+
+<p>Ref:</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/UDP_hole_punching">UDP hole punching</a></li>
+<li><a href="http://en.wikipedia.org/wiki/NAT_traversal">NAT traversal</a></li>
+<li><a href="http://www.cs.nccu.edu.tw/~lien/Writing/NGN/firewall.htm">VoIP 穿越防火牆的技術</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Supernode_(networking)">Supernode</a></li>
+<li><a href="http://rumor.nownews.com/2007/11/15/515-1728533.htm">網路追追追／用Skype到底安不安全？　PChome回應</a></li>
+<li><a href="http://arstechnica.com/business/2012/05/skype-replaces-p2p-supernodes-with-linux-boxes-hosted-by-microsoft/">Skype replaces P2P supernodes with Linux boxes hosted by Microsoft</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[TOEIC Preparation]]></title>
+    <link href="http://swem.github.io/blog/2013/05/27/toeic-preparation/"/>
+    <updated>2013-05-27T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/27/toeic-preparation</id>
+    <content type="html"><![CDATA[<p>昨天參加了一場 TOEIC 英語測驗。我趕在這個場次最後一個報名日2013/4/17日報名，而後大約花5個星期的時間準備。
+我第一次寫模擬測驗的成績大約是815分。現在考完估計應該有900分<del>，如果沒有應該就是他們的讀卡機有問題(誤)</del>。這邊分享一下我考試的心得。</p>
+
+<p>Update:  <br />
+聽力成績： 475 <br />
+閱讀成績： 470 <br />
+總成績：    945 <br />
+成績公佈，閱讀發揮的比考前模疑好。在考試的當下就感覺的出來，快速的閱讀很重要。全部寫完我還剩約5~8分鐘檢查。</p>
+
+<h2>考前準備</h2>
+
+<p>準備用書有：</p>
+
+<ol>
+<li><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010397353">國際學村 NEW TOEIC 新多益聽力題庫大全</a></li>
+<li><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010405213">國際學村 NEW TOEIC 新多益閱讀題庫大全</a></li>
+<li><a href="http://www.books.com.tw/exep/prod/booksfile.php?item=0010491570">國際學村 NEW TOEIC 新多益題庫解析【全新試題版】</a></li>
+<li><a href="http://www.toeic.com.tw/book_list_01.jsp">多益測驗官方全真試題指南III TOEIC Official Test-Preparation Guide Vol.3 【1 Book + 2 CDs】</a></li>
+</ol>
+
+
+<p>聽力題庫大全、閱讀題庫大全裡面已經幫忙排好課表，只要照表操課即可。
+不過寫了1,2周，就發現自己的進度開始落後了，畢竟現在是工作中，回家後時間並不是這麼充裕。
+原本打算寫完上面4本書，再另外到圖書館借閱幾本書來練習。因為時間緊迫，只好專注把上面的書讀過，並想辦法複習。</p>
+
+<p>事實上到最後，題庫解析我只寫了一回，聽力題庫大全、閱讀題庫大全最後部份模擬測驗沒寫。OG全真試題2回全寫完。
+然後概略的複習我比較不擅長的聽力題庫part4，及閱讀題庫的文法單元。</p>
+
+<p>在考試前兩周，我一直後悔報名的太早，如果讓我多一個月準備，應該可以準備的更完整。不過也來不及退費，只好硬著頭皮上了。
+考前3~4天，我做了官方全真試題，按照網路上答對題數跟分數的對照表<a href="http://blog.tunghua.com.tw/ELT/2011/03/14/toeic-score-count/">toeic-score-count</a>，大約落在920~930左右。
+全真試題裡沒有給對照表，只有給相對應的可能分數範圍，不過範圍大的很難參考。我的範圍大約在 870~960，取中位數也大約有900分。</p>
+
+<p>做了官方全真試題，發現聽力題庫大全、閱讀題庫大全裡的題目比較困難，口音也比較重。我覺得這樣還不錯，畢竟準備的時候，還是要準備深入一點，才能在考試時游刃有餘。</p>
+
+<h2>上考場</h2>
+
+<p>考試過程跟寫全真試題的感覺很像，難度也差不多，所以我想成績應該會很接近我的模擬測驗。真的要說，考試時聽力稍微表現的比模擬時差了一點，但應該差不了太多。</p>
+
+<p>這段時間的進步，我想主要有4項</p>
+
+<ol>
+<li>文法，提昇約25分。我過去的文法不算很好，尤其是副詞。藉由這次準備測驗讓我弄清了一些觀念。</li>
+<li>商業單字，提昇約20分。TOEIC的考題類型其實滿固定，多看商業單字有很大的幫助。聽力題庫大全後面附的單字表、mp3有很大的幫助(除了少數醫療的用詞，那些真的太少接觸，也背不起來)。</li>
+<li>聽清楚關鍵字，提昇約20分。例如以聽力Part2來說，聽清楚when, where, how。或是Par3, Part4的時間詞 hourly 等等</li>
+<li>適應口音、熟悉考試的對話型態，提昇約20分。</li>
+</ol>
+
+
+<h2>日常生活</h2>
+
+<p>我相信平常打好基礎會比考前1，2個月努力讀來的重要。而且我學英文不是為了考試，而是可以透過語言來接觸更多事物。
+下面是我的小撇步。</p>
+
+<ol>
+<li>高中時聽空中英語教室，後來上大學後轉 Advanced。雖然從大二開始就荒廢了，
+到近1,2年才開始有一搭沒一搭的聽，不過我仍然覺得彭蒙惠出版社的東西真的很不錯，
+每日課程內容的多元化讓台灣人在自學英文時能多點樂趣，而且提供一個合適的談話速度。
+在我的能力提昇到可以聽出完整細節前，Advanced 仍然會是我聽力進步的方式。
+未來實力提昇了，可以再挑戰美國廣播電台<a href="http://www.npr.org/programs/fresh-air/">Fresh Air</a>的人物訪談之類。</li>
+<li>平時上網盡量使用英文介面。不管是 Google Search, Gmail, Facebook, Twitter, 都有提供設定語言的介面。
+記得我第一次把 Gmail 介面改成英文的時候，&#8221;編寫新信&#8221;這個詞馬上換成了&#8221;Compose&#8221;。
+這個我以前總沒記熟的字，從此我再也沒忘記它。
+甚至你可以使用全英文介面的作業系統。這一點一滴的累積到最後都會有不小的影響。</li>
+<li>上網使用 Google Chrome 瀏覽器的人，我建議可以安裝<a href="https://chrome.google.com/webstore/detail/google-dictionary-by-goog/mgijmajocgfcbeboacabfgobmjgjcoja">Google Dictionary (by Google)</a>。
+Google Dictionary的巧妙設計，讓你在網路上閱讀英文文章看到不懂的字，可以馬上點兩下提供翻譯、字典服務。
+我們可以將翻譯語言設定為English，這樣馬上就有了一個英英字典可以使用。透過英英字典可以讓自己更了解單字的意思、或是再去發掘更多單字。</li>
+<li>另一個Google Chrome專屬的應用程式<a href="https://chrome.google.com/webstore/detail/nytimes/ecmphppfkcfflgglcokcbdkofpfegoel">NYTimes</a>
+則是提供了很好的新聞閱讀介面。當然以美國的新聞報導來說，沒有大量的單字量是很難讀下去的，不過我通常是試著讀TOP News的第一段，或是照片的描述。
+閱讀國外新聞除了練習英文外，也可以增進自己接受資訊的廣度，認識這個世界正在發生的事，了解很多台灣媒體從不注意的新聞。</li>
+</ol>
+
+
+<p>上述這些事並不是我想考多益才開始做，而是幾年前開始就陸續的進行。
+未來一樣要繼續努力，即使達成了階段性目標，還是希望以後可以在聽英文演講時更順暢，掌握更多細節。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Software Community Meeting in Taiwan]]></title>
+    <link href="http://swem.github.io/blog/2013/05/27/software-community-meeting-in-taiwan/"/>
+    <updated>2013-05-27T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/27/software-community-meeting-in-taiwan</id>
+    <content type="html"><![CDATA[<p><a href="http://www.linux.org.tw/node/1">http://www.linux.org.tw/node/1</a>
+這個是很多熱心的軟體人收集起來的聚會日曆，有很多活動可以報名參加，不少在台北。
+我是大約1年多前就把它加入自己的 Google Calendar，</p>
+
+<p>最近發現很多朋友還不知道有這樣的東西，很推薦可以多去參加自己有興趣的聚會活動。不只可以學到很多有趣的新技術，也可以認識到很多熱心的軟體人。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Install RVM, Ruby and Gems without sudo permission]]></title>
+    <link href="http://swem.github.io/blog/2013/05/27/install-rvm/"/>
+    <updated>2013-05-27T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/27/install-rvm</id>
+    <content type="html"><![CDATA[<p>最近接觸 Ruby on Rails，把一些使用心得補上。</p>
+
+<p>正如同很多進化中的語言，Ruby on Rails 經常會遇到函式庫版本、執行環境的管理問題。我們可以使用<a href="https://rvm.io/">Ruby Version Manager (RVM)</a>來解決這個問題。
+事實上我建議新手在第一次安裝 Ruby 前，就先安裝 RVM 來避免未來可能的問題。</p>
+
+<p>這邊我示範如何在沒有 sudo 的權限下，安裝 RVM, Ruby, Rails Gem在自己的家目錄下。每位使用者獨力安裝自己的 Ruby Environment 有個好處，就是不會相互干擾，容易除錯。
+我的環境是 Ubuntu 12.04，以下流程在 MAC OS 上也是可以運作的。(事實上這也是<a href="https://rvm.io/">Ruby Version Manager (RVM)</a>所提供的預設安裝方法，這裡只是提供我的經驗給大家參考)</p>
+
+<h2>安裝 RVM, Ruby, Rails Gem 於 ~/.rvm</h2>
+
+<p>1- 安裝 RVM</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install rvm via internet.
+</span><span class='line'>curl -L https://get.rvm.io | bash -s stable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2- 用 RVM 來安裝 Ruby</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install ruby 1.9.3 with rvm
+</span><span class='line'>rvm install 1.9.3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3- 用 Ruby 所附加的 gem 工具來安裝 Rails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install gem
+</span><span class='line'>gem install rails</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ruby相依函式庫</h2>
+
+<p>但是要特別注意的是，在安裝 Ruby 的時候，因為 Ruby 依賴 OpenSSL, YAML 等等的函式庫，
+如果你的電腦沒有這些函式庫，安裝 Ruby 時會遇到問題。有兩個方法來解決這個問題</p>
+
+<h4>請系統管理員手動安裝相依函式庫</h4>
+
+<p>以 Ubuntu12.04 為例，需要安裝 libreadline6-dev, libyaml-dev, sqlite3, libxslt1-dev, libgdbm-dev, libffi-dev
+然後依照上述步驟2，開始安裝 Ruby</p>
+
+<h4>設定 RVM autolibs 為 enable</h4>
+
+<p>設定 autolibs 為 enable</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm autolibs enable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後依照上述步驟2，開始安裝 Ruby，此時，RVM會向你要求 sudo 權限，並安裝需要的函式庫。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/16563115/how-to-install-rvm-debian-requirements-without-giving-sudo-for-rvm-user/">How to install RVM debian requirements without giving sudo for rvm user. Answered by Chen-Han Hsiao</a></li>
+<li><a href="https://rvm.io/rvm/autolibs">RVM Autolibs</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[雲端架構的構成要件]]></title>
+    <link href="http://swem.github.io/blog/2013/05/23/service-component/"/>
+    <updated>2013-05-23T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/23/service-component</id>
+    <content type="html"><![CDATA[<p>在Slide Share上看到<a href="http://www.slideshare.net/bpiatt/openstack-tutorial">Openstack Tutorial</a> ，其中第12頁點出了雲端架構的構成要件。</p>
+
+<ol>
+<li><p>Strategic Planning 策略規畫</p>
+
+<ul>
+<li>Consultants 顧問</li>
+<li>Business Process Automation 自動化商業流程</li>
+</ul>
+</li>
+<li><p>Operations 運作</p>
+
+<ul>
+<li>Database Engineers 資料庫工程師</li>
+<li>Operating System Techinicians 作業系統工程師</li>
+<li>Systems Security Professionals 系統安全工程師</li>
+<li>Network Experts 網路工程師</li>
+</ul>
+</li>
+<li><p>Systems 系統</p>
+
+<ul>
+<li>Servers, Firewalls, Load Balancers 伺服器、防火牆、負載平衡</li>
+<li>Operating Systems 作業系統</li>
+<li>Storage 儲存</li>
+<li>Management Tools 管理工具</li>
+<li>Virtualization 虛擬化</li>
+</ul>
+</li>
+<li><p>Facilities 設備</p>
+
+<ul>
+<li>Data Center 資訊中心</li>
+<li>Networking 網路</li>
+<li>Power 電力</li>
+</ul>
+</li>
+</ol>
+
+
+<p>其中 OpenStack 是包含了系統中的 儲存、管理工具、虛擬化。</p>
+
+<p>讓我想到翟本喬學長的話，不是把幾台機器塞到幾個貨櫃裡面就叫雲端。重點在於，資訊服務能不能隨著需求而跟著加大、減少、改變。</p>
+
+<p>Ref:
+1. <a href="http://www.slideshare.net/bpiatt/openstack-tutorial">Openstack Tutorial</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AWSome Day on May 16 in Taipei.]]></title>
+    <link href="http://swem.github.io/blog/2013/05/16/awsome-day-on-may-16-in-taipei/"/>
+    <updated>2013-05-16T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/16/awsome-day-on-may-16-in-taipei</id>
+    <content type="html"><![CDATA[<p>2013/5/16 參加了Amazon辦的 AWSome Day，在台北國際會議中心的201會議室，大約有500人參與了這次活動。
+這是Amazon 第一次在台北舉辦這樣的活動。透過這樣的活動，大家可以更加認識目前 <a href="http://aws.amazon.com/">Amazon Web Services</a> 所提供的服務。
+事實上已經有很多台灣的團隊使用了 AWS，現場也有幾位Amazon 技術人員提供咨詢服務</p>
+
+<p>開場的 Keynote 是介紹 Amazon Web Services 的核心理念(Help Customers to save money)、規模成長。
+這一段就像是產品推銷，不過其實很適合還不認識這些服務的用途的人來聽。以目前 AWS 的服務來說，確實可以為企業帶來穩定且相對收費不高的基礎資訊服務，讓企業在打造應用的時候，可以無後顧之憂.</p>
+
+<p>無數的知名應用服務中，我想 <a href="https://www.dropbox.com">Dropbox</a> 是台灣使用者最為熟悉的。而美國 Netflix 則是應用了Amazon Web Services，打造了目前最熱門的電影串流服務，據統計Netflix 就佔去了北美1/3的下載網路流量。</p>
+
+<p>後面大約6小時的課程則是針對，Computing Instance, Networking, Storage, Content Delivery 等等介紹 Amazon 相對應的服務，並簡單示範操作方式。</p>
+
+<p>包含常見的
+* Amazon Elastic Compute Cloud (EC2)
+* Amazon Simple Storage Service (S3)</p>
+
+<p>以及
+* Amazon Virtual Private Cloud
+* Amazon CloudFront
+* Amazon Route 53</p>
+
+<p>最近推出的
+* AWS Elastic Beanstalk</p>
+
+<p>上面沒有全部列完，因為各別服務種類確實很多，上面是大家較常開始使用的服務。
+這些服務大多都是 pay-as-you-go，也就是使用多少就付費多少，大量使用者有一些優惠；
+對於小量使用者也非常吸引，可以小量的建立自己的專案應用，再慢慢擴大規模，而不用一開始就付出大量金額。</p>
+
+<p>活動的最後還有抽獎，送出了一台 Amazon Kindle，可惜我沒抽到。不過每位參加者都可以拿到一件T-shirt、$25美元的 voucher讓大家可以回家試用 AWS。</p>
+
+<p>Ref:</p>
+
+<p><a href="http://allthingsd.com/20130514/netflix-still-eats-a-third-of-the-web-every-night-amazon-hbo-and-hulu-trail-behind/">Netflix Still Eats a Third of the Web Every Night; Amazon, HBO and Hulu Trail Behind</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[offline access for google drive]]></title>
+    <link href="http://swem.github.io/blog/2013/05/13/offline-access-for-google-drive/"/>
+    <updated>2013-05-13T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/13/offline-access-for-google-drive</id>
+    <content type="html"><![CDATA[<p>Google 推出行動硬碟、日曆的離線存取已經有一段時間，我覺得這是個很棒的功能，不過實際使用後才發現有些眉角。
+有些使用者安裝了離線版的 <a href="https://chrome.google.com/webstore/detail/google-drive/apdfllckaahabafndbhieahigkjlhalf?hl=zh-TW">Google 行動硬碟</a>、<a href="https://chrome.google.com/webstore/detail/google-calendar/ejjicmeblgpmajnghnpcppodonldlgfn?hl=zh-TW">Google 日曆</a>，卻發現仍然沒辦法離線使用</p>
+
+<p>原因出在於 Google 的離線功能需要進行啟用，而且使用者若有多台電腦，則必須為每一台分別開啟離線功能。
+你有10台電腦，就要啟用10次。</p>
+
+<p>我想這樣的設計是為了確保使用者的資料是安全的，使用者只在安全的個人電腦上使用離線資料，
+不會說在1台電腦上啟用了離線，另外9台也跟著啟用，導致使用者的資料有外洩的可能。</p>
+
+<p>Google 離線啟用的步驟如下，文章最後附上Google 說明連結。</p>
+
+<h2>設定離線存取</h2>
+
+<p>如要在您的電腦上啟用離線存取功能，請按照下列步驟操作。請注意，離線存取功能只能在 Chrome 中使用。</p>
+
+<ol>
+<li>按一下畫面左方的 [更多]。</li>
+<li>選擇 [Google 文件離線版]。</li>
+<li>設定離線存取只需兩個簡單步驟，首先，按一下標示 [啟用 Google 文件離線版] 的藍色按鈕。幾秒鐘後，系統會讓您繼續前往下一個步驟。</li>
+<li>在對話框右邊按一下藍色的 [從 Chrome 線上應用程式商店安裝] 按鈕。如果您已經安裝應用程式，則無需完成這個步驟。</li>
+<li>之後，系統會將您導向至 Chrome 線上應用程式商店。按一下瀏覽器視窗右上角的 [加到 Chrome]。</li>
+<li>應用程式安裝完成後，系統會將您導向 Chrome 頁面，其中會顯示 Google 雲端硬碟應用程式圖示。如要返回雲端硬碟，請按一下 [Google 雲端硬碟] 圖示。</li>
+</ol>
+
+
+<h2>不同檔案類型的存取權</h2>
+
+<p><strong>Google 文件和試算表</strong></p>
+
+<p>現在就算沒連上網路，也可以檢視 Google 文件和試算表，甚至可以在離線時編輯 Google 文件。目前使用者還無法在離線狀態下查看 Google 簡報、表單或繪圖。進一步瞭解如何使用 Google 文件離線版。</p>
+
+<p><strong>其他儲存在 Google 雲端硬碟中的檔案</strong></p>
+
+<p>就算您沒連上網際網路，仍可在 Google 雲端硬碟資料夾中查看及編輯檔案 (例如 PDF、Microsoft Office 檔案、圖片)。您在離線時對同步檔案所做的所有變更，都會在重新連上網際網路時與具有時間戳記的所有裝置重新同步處理。</p>
+
+<h2>停用離線存取</h2>
+
+<p>如果您不需要在離線時存取您的雲端硬碟，請按一下瀏覽器視窗右上角的齒輪圖示，然後選取 [停止使用 Google 文件離線版]。</p>
+
+<p><code>為了確保 Google 雲端硬碟的資料安全性，除了您自己的個人電腦或是具有受密碼保護的帳戶的電腦以外，請勿啟用離線存取功能。如果您在公共電腦或共用電腦上啟用離線存取功能，其他人可能會看到您所同步的 Google 文件和試算表，因而導致您的資料發生危險。</code></p>
+
+<h4>Ref:</h4>
+
+<ol>
+<li><a href="http://support.google.com/drive/bin/answer.py?hl=b5&amp;hlrm=en&amp;answer=2375012">在離線狀態下存取 Google 雲端硬碟</a></li>
+<li><a href="https://support.google.com/calendar/answer/1340696?hl=zh-Hant&amp;uls=zh-Hant">Google 日曆的離線存取功能</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[cURL HTTP redirects]]></title>
+    <link href="http://swem.github.io/blog/2013/05/10/curl-http-redirects/"/>
+    <updated>2013-05-10T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/10/curl-http-redirects</id>
+    <content type="html"><![CDATA[<p>cURL 是一個 unix 下以命令操作來取得檔案、頁面的工具，在網頁測試中經常使用到。不過要注意的是，cURL 預設並不處理 HTTP 重導向。</p>
+
+<p>昨天在 github 上看到了一個有趣的專案 <a href="https://github.com/fzaninotto/screenshot-as-a-service/">screenshot-as-a-service</a>，這個專案給使用者的第一個範例就是用 cURL 來進行操作。不過在 Readme.md 裡有點小錯誤。於是我就將它改正過來，並送了一個 Pull Request。
+<a href="https://github.com/fzaninotto/screenshot-as-a-service/pull/35">revise usage example in Readme.md</a></p>
+
+<p>今天發現作者已經將我的 patch 合併進了專案，有興趣的人可以抓下來試一試。</p>
+
+<p>註：現今的網頁設計中，重導向至少有三種。</p>
+
+<ol>
+<li>HTTP redirects</li>
+<li>Redirects with HTML tag</li>
+<li>Redirects with javascript</li>
+</ol>
+
+
+<p>在 cURL 中，可以下參數讓 cURL 進行第1種 HTTP 重導向。至於第 2, 3 種，cURL 則是完全不支援。原因很簡單，就如同 cURL 最初的設計，是用來取得檔案、頁面用的。它並不是特別用來處理 HTML 的工具，所以這2類重導向就交給其它的工具去處理了。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://curl.haxx.se/docs/faq.html#How_do_I_tell_curl_to_follow_HTT">How do I tell curl to follow HTTP redirects?</a></li>
+<li><a href="http://curl.haxx.se/docs/faq.html#Redirects_work_in_browser_but_no">Redirects work in browser but not with curl!</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[File Descriptor in Bash Shell]]></title>
+    <link href="http://swem.github.io/blog/2013/05/09/file-descriptor-in-bash-shell/"/>
+    <updated>2013-05-09T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/09/file-descriptor-in-bash-shell</id>
+    <content type="html"><![CDATA[<p>一個程式至少會開啟三個Input/Output 串流，分別為</p>
+
+<ol>
+<li>Standard input (stdin)  標準輸入</li>
+<li>Standard output (stdout) 標準輸出</li>
+<li>Standard error (stderr) 標準錯誤訊息</li>
+</ol>
+
+
+<p>操作時相對應的代號就是file descriptor。</p>
+
+<p>在 Bash Shell 中，你最多可以有10個 file descriptor。利用這些 descriptor，你可以結合他們把輸出訊息、錯誤訊息，都導到同一個檔案中，並同時在螢幕上顯示出來。</p>
+
+<h2>I/O redirection 的順序性</h2>
+
+<p>在進行 I/O redirection 的時候，要注意順序性 (If redirecting both stdout and stderr, the order of the commands makes a difference.)。
+以下2個命令是不同的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sh script.sh &gt;log.txt 2&gt;&1
+</span><span class='line'>$ sh script.sh 2&gt;&1 &gt;log.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-第1個命令，將stdout 導向 log.txt，然後stderr 導向 stdout。如此一來，stderr 也將導入 log.txt。
+-第2個命令，將stderr 導向 stdout，然後原先的stdout 導向 log.txt。此時log.txt 只會包含 stdout</p>
+
+<p>進階應用的話可以參考 Fourdollars 的文章<a href="http://fourdollars.blogspot.tw/2013/03/bash-redirection.html">關於 Bash 的 Redirection 使用的心得</a>。
+裡面提到了如何將標準輸出訊息跟標準錯誤訊息都導進 fdisk.log 裡面，然後將標準錯誤訊息顯示出來。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://fourdollars.blogspot.tw/2013/03/bash-redirection.html">關於 Bash 的 Redirection 使用的心得</a></li>
+<li><a href="http://www.study-area.org/cyril/scripts/scripts/node32.html">File descriptor與I/O導向</a></li>
+<li><a href="http://www.tldp.org/LDP/abs/html/io-redirection.html">Advanced Bash-Scripting Guide: Chapter 20. I/O Redirection</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git submodule]]></title>
+    <link href="http://swem.github.io/blog/2013/05/06/git-submodule/"/>
+    <updated>2013-05-06T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/06/git-submodule</id>
+    <content type="html"><![CDATA[<p>我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
+(例如Web App 可能會想要引用 <a href="http://github.com/facebook/facebook-ios-sdk">facebook-ios-sdk</a>)</p>
+
+<p>使用 git submodule 要先掌握2件事</p>
+
+<ol>
+<li>git 使用 .gitmodules 來對應小專案、函式庫於大專案中的資料夾位置。</li>
+<li>每個開發者可以自行管理要不要取出各個小專案，每個小專案的設定將被註冊在 .git/config</li>
+</ol>
+
+
+<h2>Add submodule</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add /path/to/library library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Check-out submodule</h2>
+
+<p>其它協同開發者在大專案中準備取出小專案前，需要先 init, 把小專案的路徑依 .gitmodule 的內容，註冊到自己的 .git/config (如此，git 才知道怎麼去取出、更新小專案)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之後就可以開始更新小專案了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或是加入 &mdash;recursive 參數，把小專案中的小專案也一併取出來</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update --recursive</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Remove submodule</h2>
+
+<p>移除 submodule 時，修改 .gitmodules 的內容，將欲刪除的 submodule 設定刪掉，並將大專案中的小專案資料夾刪去。再 commit 即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .gitmodules
+</span><span class='line'>vim .gitmodules
+</span><span class='line'># remove 
+</span><span class='line'>rm -rf library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<p>.git/config 內已註冊的小專案路徑，也可將它刪掉(非必要，但建議)。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .git/config
+</span><span class='line'>vim .git/config</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/">Git Submodules: Adding, Using, Removing, Updating</a></li>
+<li><a href="http://josephjiang.com/entry.php?id=342">Git Submodule 的認識與正確使用！</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[git subtree merge strategy]]></title>
+    <link href="http://swem.github.io/blog/2013/05/02/git-subtree-merge-strategy/"/>
+    <updated>2013-05-02T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/05/02/git-subtree-merge-strategy</id>
+    <content type="html"><![CDATA[<p>最近工作上遇到一個問題，我們希望在自己的專案中保有專案所依賴的函式庫，而不隨著函式庫的版本更新而變動。例如我們也許想使用
+<a href="http://www.boost.org/users/history/version_1_53_0.html">boost 1.5.3</a> 做為我們的依賴函式庫，未來等 <a href="http://www.boost.org/">boost</a> 改版到 1.6 以後，也許先不急著更換，等到時機恰當再做更換。</p>
+
+<p>在專案中保有的函式庫，檔案結構如：</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>project
+</span><span class='line'>├── lib
+</span><span class='line'>│   └── boost
+</span><span class='line'>└── src
+</span><span class='line'>    └── test.cpp</span></code></pre></td></tr></table></div></figure>
+
+
+<p>對於這樣的開發需求，我們可以採用 git 裡的 subtree 來幫助我們做到這件事。</p>
+
+<p><strong> A. 將 lib 併入專案 </strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git remote add -f boost /path/to/boost
+</span><span class='line'>$ git merge -s ours --no-commit boost/master
+</span><span class='line'>$ git read-tree --prefix=lib/boost/ -u boost/master
+</span><span class='line'>$ git commit -m "Merge boost as our subdirectory"</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong> B. 導入 lib 更新 </strong></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rm -rf lib/project1
+</span><span class='line'>$ git add -u
+</span><span class='line'>$ git merge -s ours --no-commit boost/master
+</span><span class='line'>$ git read-tree --prefix=lib/boost/ -u boost/master
+</span><span class='line'>$ git commit -m "Merge boost as our subdirectory"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之所以採用 git subtree，而不採用 git submodule。是因為 git submodule 的更新原則基本上是會更新到最新的版本，以我們的開發需求並不適用。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="https://www.kernel.org/pub/software/scm/git/docs/howto/using-merge-subtree.html">How to use the subtree merge strategy</a></li>
+<li><a href="https://help.github.com/articles/working-with-subtree-merge">Working with subtree merge</a></li>
+</ol>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[npm install]]></title>
+    <link href="http://swem.github.io/blog/2013/04/25/npm-install/"/>
+    <updated>2013-04-25T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/04/25/npm-install</id>
+    <content type="html"><![CDATA[<p>NPM (Node Packaged Modules) 是 Node.js 裡很好用的模組安裝工具。從 npm 1.0 開始，有兩個方式來安裝模組。</p>
+
+<ol>
+<li>全域安裝，通常會把模組安裝在 /usr/local/lib/node_modules 的位置。</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>npm install -g express
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<ol>
+<li>專案資料夾內的安裝，</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>npm install express
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>如何決定要用什麼方式來安裝呢。Node.js 提供了以下的原則：</p>
+
+<ol>
+<li>如果你要安裝的模組是用在專案中，以 require(&lsquo;whatever&rsquo;) 的方式來引用。那麼就在專案的資料夾安裝</li>
+<li>如果你安裝的模組是要在 shell 裡使用的，那麼就用全域安裝。</li>
+</ol>
+
+
+<p>不過，有些模組你既需要在專案中 require 它，也需要在 shell 中執行它所附加的小工具。像是常用的<a href="http://coffeescript.org/">Coffee-script</a>、<a href="http://expressjs.com/">Express</a>。
+那該怎麼做比較好呢。我建議你在全域還有專案資料夾內各安裝一份，這樣子很簡單也容易維護。</p>
+
+<p>P.S. 你可以用 npm -v 來確定自己的 npm 是否為1.0 以上的版本。</p>
+
+<p>Ref:
+<a href="http://blog.nodejs.org/2011/03/23/npm-1-0-global-vs-local-installation/">npm 1.0: Global vs Local installation</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Code School Hall Passes]]></title>
+    <link href="http://swem.github.io/blog/2013/04/24/code-school-hall-passes/"/>
+    <updated>2013-04-24T00:00:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/04/24/code-school-hall-passes</id>
+    <content type="html"><![CDATA[<p>Code School 現在可以啟用兩天完全免費的課程
+<a href="http://www.codeschool.com/hall_passes/fdd59c145dca/claim_shared">Code School &ndash; Hall Pass</a></p>
+
+<p>目前他們的商業模式是少部份課程免費，其餘課程要成為收費會員才能上課，1個月 25 美元。
+大多是 Web development 相關，課程的品質很好，對初學者很好上手，有興趣的人可以試一試。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[DigitalOcean 初體驗]]></title>
+    <link href="http://swem.github.io/blog/2013/04/10/digitalocean/"/>
+    <updated>2013-04-10T15:02:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/04/10/digitalocean</id>
+    <content type="html"><![CDATA[<p>前幾天剛好有虛擬機器的需要，所以上 <a href="https://www.digitalocean.com">DigitalOcean</a> 開了一台最便宜的來試試。</p>
+
+<p>架設 Server 十分容易，方案選一下，信用卡開下去就有了。
+設備：512MB Memory, 1 Core, 20GB SSD Disk, 1TB Transfer</p>
+
+<p>我選在 New York 的 Data Center，從台灣連過去的 Latency 大約是230ms。差強人意，但以我的用途可接受。
+使用12小時花了 $0.09 美元，實在是非常划算。</p>
+
+<p>後來因為用不到了，所以把機器做了個 Snapshot，然後就把機器刪除了。
+這樣就不會產生任何花費。等到以後需要再從 Snapshot 重新建一台 Server 回來用就好。</p>
+
+<p>能夠以使用時數計費，還有價格相對於 <a href="http://www.linode.com/">Linode</a> 便宜，是我選擇 DigitalOcean 的原因。</p>
+
+<p>Ref[1]: <a href="http://blog.gslin.org/archives/2013/02/13/3203/digitalocean-%E8%88%87-linode-%E7%9A%84%E6%AF%94%E8%BC%83/">DigitalOcean 與 Linode 的比較…</a></p>
+
+<p>Ref[2]: <a href="http://jasonormand.com/2013/02/08/linode-vs-digitalocean-performance-benchmarks/">Linode vs DigitalOcean, performance benchmarks</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Boost Unit Test Framework in UVa Online Judge]]></title>
+    <link href="http://swem.github.io/blog/2013/03/27/boost-unit-test-framework-in-uva-online-judge/"/>
+    <updated>2013-03-27T16:07:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/03/27/boost-unit-test-framework-in-uva-online-judge</id>
+    <content type="html"><![CDATA[<p>利用 Boost Unit Test Framework，可以方便的進行單元測試。
+而在 UVa Online Judge 的練習中，我們也可以導入 Boost Unit Test Framework 來對我們寫的 function 進行測試。
+不過 UVa Online Judge 的編譯環境是不支援 Boost 的，但在編譯時，它會給一個特別的編譯參數 -DONLINE_JUDGE。
+所以我們可以利用Uva 這個特有的編譯參數，在導入 Boost Unit Test Framework 時，又不會發生Compiler Error.</p>
+
+<p>單元測試時：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>g++ 530.cpp -lboost_unit_test_framework
+</span><span class='line'><span class="nv">$ </span>./a.out
+</span><span class='line'>Running 2 <span class="nb">test </span>cases...
+</span><span class='line'>
+</span><span class='line'>*** No errors detected
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>以測資做為輸入的測試：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>g++ 530.cpp -DONLINE_JUDGE
+</span><span class='line'><span class="nv">$ </span>./a.out &lt;input.txt
+</span><span class='line'>6
+</span><span class='line'>252
+</span><span class='line'>13983816
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<p>程式碼：</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="c1">//============================================================================</span>
+</span><span class='line'><span class="c1">// Name        : 530.cpp</span>
+</span><span class='line'><span class="c1">// Author      :</span>
+</span><span class='line'><span class="c1">// Version     :</span>
+</span><span class='line'><span class="c1">// Copyright   : copyright notice</span>
+</span><span class='line'><span class="c1">//============================================================================</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;cstdlib&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string&gt;</span>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifndef ONLINE_JUDGE</span>
+</span><span class='line'><span class="cp">#define BOOST_TEST_DYN_LINK</span>
+</span><span class='line'><span class="cp">#define BOOST_TEST_MODULE acm</span>
+</span><span class='line'><span class="cp">#include &lt;boost/test/unit_test.hpp&gt;</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">long</span> <span class="kt">long</span> <span class="n">combinations</span><span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">k</span> <span class="o">&gt;</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">k</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">k</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">idx</span> <span class="o">&lt;=</span> <span class="n">k</span><span class="p">;</span> <span class="n">idx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="n">ans</span> <span class="o">*=</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>      <span class="n">ans</span> <span class="o">=</span> <span class="n">ans</span> <span class="o">/</span> <span class="n">idx</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#ifdef ONLINE_JUDGE</span>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">combinations</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">#else</span>
+</span><span class='line'><span class="n">BOOST_AUTO_TEST_SUITE</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">BOOST_AUTO_TEST_CASE</span><span class="p">(</span><span class="n">testSmall</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">6</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">20</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">252</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">BOOST_AUTO_TEST_CASE</span><span class="p">(</span><span class="n">testLarge</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="n">BOOST_CHECK</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="mi">49</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="mi">13983816</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">BOOST_AUTO_TEST_SUITE_END</span><span class="p">()</span>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RIP, Google Reader]]></title>
+    <link href="http://swem.github.io/blog/2013/03/14/rip/"/>
+    <updated>2013-03-14T12:15:00+08:00</updated>
+    <id>http://swem.github.io/blog/2013/03/14/rip</id>
+    <content type="html"><![CDATA[<p>今天 Google 宣布了 Google Reader 將於 2013/7/1 結束運作。</p>
+
+<p>另一個 RSS 訂閱服務 Feedly 則馬上做出了回應，
+Feedly 這項服務提供 Google Reader 使用者連結自己所訂閱的 RSS,
+並以 Feedly 較為活潑清爽的版面來進行閱讀。
+於 Feedly 上連結 Google Reader 的使用者，將可以在 2013/7/1 後，無痛延續閱讀自己訂閱的 RSS 來源.</p>
+
+<p>就我先前的經驗來說，Feedly是個有趣的閱讀介面，
+雖然我比較喜歡簡單的閱讀介面，所以還是維持使用 Google Reader,
+不過既然現在 Feedly 提供這樣的服務(事實上提供Google Reader的連結訂閱，一直是Feedly的主力服務)，
+我想就開始使用看看吧。</p>
+
+<p>有興趣的人可以到: <a href="http://www.feedly.com/">Feedly</a></p>
+
+<p>Ref:<br>
+1. <a href="http://googleblog.blogspot.com/2013/03/a-second-spring-of-cleaning.html">A second spring of cleaning</a> <br>
+2. <a href="http://googlereader.blogspot.com/2013/03/powering-down-google-reader.html">Powering Down Google Reader</a> <br>
+3. <a href="http://blog.feedly.com/2013/03/14/google-reader/">Transitioning from Google Reader to feedly</a> <br></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Memory blocks are possibly lost (Valgrind example again!!)]]></title>
+    <link href="http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/"/>
+    <updated>2012-12-25T09:47:00+08:00</updated>
+    <id>http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again</id>
+    <content type="html"><![CDATA[<p>今天讀到的文章 <a href="http://www.linuxprogrammingblog.com/using-valgrind-to-debug-memory-leaks">Using Valgrind to debug memory leaks</a></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ctype.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="o">*</span><span class="n">lower</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="o">*</span><span class="nf">to_lower</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">l</span> <span class="o">=</span> <span class="n">strdup</span> <span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">isupper</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">))</span>
+</span><span class='line'>          <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">tolower</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">lower</span> <span class="o">=</span> <span class="n">to_lower</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">lower</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">putchar</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">lower</span><span class="o">++</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>輸出訊息</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>==28578== 5 bytes in 1 blocks are possibly lost in loss record 1 of 1
+</span><span class='line'>==28578==    at 0x4025D2E: malloc (vg_replace_malloc.c:207)
+</span><span class='line'>==28578==    by 0x40D805F: strdup (in /lib/tls/i686/cmov/libc-2.8.90.so)
+</span><span class='line'>==28578==    by 0x8048504: to_lower (test2.c:9)
+</span><span class='line'>==28578==    by 0x804857F: main (test2.c:22)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This time memory is possibly lost. Why it&rsquo;s not sure? Because at the program exit time we didn&rsquo;t completely lost the pointer to the allocated memory, we&rsquo;ve only advanced it to print the lower string in a funny way. It&rsquo;s theoretically possible that we have a variable, a counter that tells us how much we&rsquo;ve advanced, so we could compute the pointer to the memory to free it.</p>
+
+<p>文章還提到了 Valgrind In practice. 很值得一看</p>
+
+<p>At the beginning of using Valgrind to debug my programs I used to think this way: It&rsquo;s just an automatic, dumb tool that tracks memory allocations and can be wrong. I looked at the code and there can be no memory leak at this point, it&rsquo;s one of the cases when Valgrind is wrong.. But I was wrong! After years of using it I can see that 99,9% of it&rsquo;s messages are right but it&rsquo;s often hard to see it in the code.</p>
+
+<p>One real world case was when I was writing a multi-threaded program that used libmysqlclient library and valgrind showed memory leaks in mysql_real_connect()/mysql_init(). It&rsquo;s clear from documentation that the memory allocated by the library when using those functions should be freed by mysql_close(). From the code it was clear that I do it properly: every created connection was closed. I even added a counter to the places when I create connection and destroy it and saw all connections were destroyed. I started to think that there is a memory leak in the libmysqlclient_r library (a thread-safe version) but when I separated the code (wrote a simple program that allocates conenctions and free them) Valgrind showed no errors. So there are no leaks in the library. If I had less believe in Valgrind I would give up at this moment, but I knew it&rsquo;s right. As I found out there is a special requirement by libmysqlclient_r, I just didn&rsquo;t read the documentation. If you are creating MYSQL objects in different threads the library automatically allocates per-thread global data, but to free them you must use mysql_thread_end(). It&rsquo;s not done</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Valgrind - 檢查程式記憶體的小工具]]></title>
+    <link href="http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/"/>
+    <updated>2012-12-17T12:46:00+08:00</updated>
+    <id>http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju</id>
+    <content type="html"><![CDATA[<p>Octopress 的第一篇文章，簡單介紹 Valgrind &ndash; 檢查程式記憶體的小工具</p>
+
+<p>前陣子我對 project 進行 Debug
+其中有一些 runtime error, 包含 memory leak</p>
+
+<p>我使用 Valgrind 來檢查 Memory Leak</p>
+
+<p>小範例，由 Valgrind 找出 test.cpp 第8行的 Bug  ( Invalid read )</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;vector&gt;</span>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span> <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">array</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">array</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$g++ -g test.cpp
+$valgrind ./a.out</p>
+
+<p>輸出訊息</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>==9247== Memcheck, a memory error detector
+</span><span class='line'>==9247== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+</span><span class='line'>==9247== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+</span><span class='line'>==9247== Command: ./a.out
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== Invalid read of size 8
+</span><span class='line'>==9247==    at 0x80487C4: main (test.cpp:8)
+</span><span class='line'>==9247==  Address 0x4336028 is 0 bytes after a block of size 8,192 alloc'd
+</span><span class='line'>==9247==    at 0x402B9B4: operator new(unsigned int) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+</span><span class='line'>==9247==    by 0x8048BD1: __gnu_cxx::new_allocator&lt;double>::allocate(unsigned int, void const*) (new_allocator.h:92)
+</span><span class='line'>==9247==    by 0x8048B1D: std::_Vector_base&lt;double, std::allocator&lt;double> >::_M_allocate(unsigned int) (in /home/stanleyhsiao/a.out)
+</span><span class='line'>==9247==    by 0x80489BC: std::_Vector_base&lt;double, std::allocator&lt;double> >::_Vector_base(unsigned int, std::allocator&lt;double> const&) (stl_vector.h:123)
+</span><span class='line'>==9247==    by 0x80488D1: std::vector&lt;double, std::allocator&lt;double> >::vector(unsigned int, double const&, std::allocator&lt;double> const&) (stl_vector.h:265)
+</span><span class='line'>==9247==    by 0x80487A3: main (test.cpp:7)
+</span><span class='line'>==9247==
+</span><span class='line'>0
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== HEAP SUMMARY:
+</span><span class='line'>==9247==     in use at exit: 0 bytes in 0 blocks
+</span><span class='line'>==9247==   total heap usage: 1 allocs, 1 frees, 8,192 bytes allocated
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== All heap blocks were freed -- no leaks are possible
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== For counts of detected and suppressed errors, rerun with: -v
+</span><span class='line'>==9247== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)</span></code></pre></td></tr></table></div></figure>
+
+
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,345 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Valgrind - 檢查程式記憶體的小工具 - swem's tech talk</title>
+  <meta name="author" content="swem">
+
+  
+  <meta name="description" content="Octopress 的第一篇文章，簡單介紹 Valgrind &ndash; 檢查程式記憶體的小工具 前陣子我對 project 進行 Debug
+其中有一些 runtime error, 包含 memory leak 我使用 Valgrind 來檢查 Memory Leak 小範例，由 &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">swem's tech talk</a></h1>
+  
+    <h2>keep hacking.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:swem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Valgrind - 檢查程式記憶體的小工具</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-17T12:46:00+08:00" pubdate data-updated="true">Dec 17<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Octopress 的第一篇文章，簡單介紹 Valgrind &ndash; 檢查程式記憶體的小工具</p>
+
+<p>前陣子我對 project 進行 Debug
+其中有一些 runtime error, 包含 memory leak</p>
+
+<p>我使用 Valgrind 來檢查 Memory Leak</p>
+
+<p>小範例，由 Valgrind 找出 test.cpp 第8行的 Bug  ( Invalid read )</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;vector&gt;</span>
+</span><span class='line'><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span> <span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">array</span><span class="p">(</span><span class="mi">1024</span><span class="p">);</span>
+</span><span class='line'>    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">array</span><span class="p">[</span><span class="mi">1024</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span> <span class="p">;</span>
+</span><span class='line'>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>$g++ -g test.cpp
+$valgrind ./a.out</p>
+
+<p>輸出訊息</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>==9247== Memcheck, a memory error detector
+</span><span class='line'>==9247== Copyright (C) 2002-2011, and GNU GPL'd, by Julian Seward et al.
+</span><span class='line'>==9247== Using Valgrind-3.7.0 and LibVEX; rerun with -h for copyright info
+</span><span class='line'>==9247== Command: ./a.out
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== Invalid read of size 8
+</span><span class='line'>==9247==    at 0x80487C4: main (test.cpp:8)
+</span><span class='line'>==9247==  Address 0x4336028 is 0 bytes after a block of size 8,192 alloc'd
+</span><span class='line'>==9247==    at 0x402B9B4: operator new(unsigned int) (in /usr/lib/valgrind/vgpreload_memcheck-x86-linux.so)
+</span><span class='line'>==9247==    by 0x8048BD1: __gnu_cxx::new_allocator&lt;double>::allocate(unsigned int, void const*) (new_allocator.h:92)
+</span><span class='line'>==9247==    by 0x8048B1D: std::_Vector_base&lt;double, std::allocator&lt;double> >::_M_allocate(unsigned int) (in /home/stanleyhsiao/a.out)
+</span><span class='line'>==9247==    by 0x80489BC: std::_Vector_base&lt;double, std::allocator&lt;double> >::_Vector_base(unsigned int, std::allocator&lt;double> const&) (stl_vector.h:123)
+</span><span class='line'>==9247==    by 0x80488D1: std::vector&lt;double, std::allocator&lt;double> >::vector(unsigned int, double const&, std::allocator&lt;double> const&) (stl_vector.h:265)
+</span><span class='line'>==9247==    by 0x80487A3: main (test.cpp:7)
+</span><span class='line'>==9247==
+</span><span class='line'>0
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== HEAP SUMMARY:
+</span><span class='line'>==9247==     in use at exit: 0 bytes in 0 blocks
+</span><span class='line'>==9247==   total heap usage: 1 allocs, 1 frees, 8,192 bytes allocated
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== All heap blocks were freed -- no leaks are possible
+</span><span class='line'>==9247==
+</span><span class='line'>==9247== For counts of detected and suppressed errors, rerun with: -v
+</span><span class='line'>==9247== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">swem</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-17T12:46:00+08:00" pubdate data-updated="true">Dec 17<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/" data-via="" data-counturl="http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/" title="Next Post: Memory blocks are possibly lost (Valgrind example again!!)">Memory blocks are possibly lost (Valgrind example again!!) &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/toeic-preparation/">TOEIC Preparation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - swem -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'swemsoctopressblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/';
+        var disqus_url = 'http://swem.github.io/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

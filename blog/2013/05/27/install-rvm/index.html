@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Install RVM, Ruby and Gems without sudo permission - swem's tech talk</title>
+  <meta name="author" content="swem">
+
+  
+  <meta name="description" content="最近接觸 Ruby on Rails，把一些使用心得補上。 正如同很多進化中的語言，Ruby on Rails 經常會遇到函式庫版本、執行環境的管理問題。我們可以使用Ruby Version Manager (RVM)來解決這個問題。
+事實上我建議新手在第一次安裝 Ruby 前，就先安裝 RVM &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swem.github.io/blog/2013/05/27/install-rvm">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">swem's tech talk</a></h1>
+  
+    <h2>keep hacking.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:swem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Install RVM, Ruby and Gems Without Sudo Permission</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-27T00:00:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>最近接觸 Ruby on Rails，把一些使用心得補上。</p>
+
+<p>正如同很多進化中的語言，Ruby on Rails 經常會遇到函式庫版本、執行環境的管理問題。我們可以使用<a href="https://rvm.io/">Ruby Version Manager (RVM)</a>來解決這個問題。
+事實上我建議新手在第一次安裝 Ruby 前，就先安裝 RVM 來避免未來可能的問題。</p>
+
+<p>這邊我示範如何在沒有 sudo 的權限下，安裝 RVM, Ruby, Rails Gem在自己的家目錄下。每位使用者獨力安裝自己的 Ruby Environment 有個好處，就是不會相互干擾，容易除錯。
+我的環境是 Ubuntu 12.04，以下流程在 MAC OS 上也是可以運作的。(事實上這也是<a href="https://rvm.io/">Ruby Version Manager (RVM)</a>所提供的預設安裝方法，這裡只是提供我的經驗給大家參考)</p>
+
+<h2>安裝 RVM, Ruby, Rails Gem 於 ~/.rvm</h2>
+
+<p>1- 安裝 RVM</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install rvm via internet.
+</span><span class='line'>curl -L https://get.rvm.io | bash -s stable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2- 用 RVM 來安裝 Ruby</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install ruby 1.9.3 with rvm
+</span><span class='line'>rvm install 1.9.3</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3- 用 Ruby 所附加的 gem 工具來安裝 Rails</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># install gem
+</span><span class='line'>gem install rails</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Ruby相依函式庫</h2>
+
+<p>但是要特別注意的是，在安裝 Ruby 的時候，因為 Ruby 依賴 OpenSSL, YAML 等等的函式庫，
+如果你的電腦沒有這些函式庫，安裝 Ruby 時會遇到問題。有兩個方法來解決這個問題</p>
+
+<h4>請系統管理員手動安裝相依函式庫</h4>
+
+<p>以 Ubuntu12.04 為例，需要安裝 libreadline6-dev, libyaml-dev, sqlite3, libxslt1-dev, libgdbm-dev, libffi-dev
+然後依照上述步驟2，開始安裝 Ruby</p>
+
+<h4>設定 RVM autolibs 為 enable</h4>
+
+<p>設定 autolibs 為 enable</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rvm autolibs enable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然後依照上述步驟2，開始安裝 Ruby，此時，RVM會向你要求 sudo 權限，並安裝需要的函式庫。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://stackoverflow.com/questions/16563115/how-to-install-rvm-debian-requirements-without-giving-sudo-for-rvm-user/">How to install RVM debian requirements without giving sudo for rvm user. Answered by Chen-Han Hsiao</a></li>
+<li><a href="https://rvm.io/rvm/autolibs">RVM Autolibs</a></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">swem</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-27T00:00:00+08:00" pubdate data-updated="true">May 27<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2013/05/27/install-rvm/" data-via="" data-counturl="http://swem.github.io/blog/2013/05/27/install-rvm/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/23/service-component/" title="Previous Post: 雲端架構的構成要件">&laquo; 雲端架構的構成要件</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/27/software-community-meeting-in-taiwan/" title="Next Post: Software Community Meeting in Taiwan">Software Community Meeting in Taiwan &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/toeic-preparation/">TOEIC Preparation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - swem -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'swemsoctopressblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://swem.github.io/blog/2013/05/27/install-rvm/';
+        var disqus_url = 'http://swem.github.io/blog/2013/05/27/install-rvm/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

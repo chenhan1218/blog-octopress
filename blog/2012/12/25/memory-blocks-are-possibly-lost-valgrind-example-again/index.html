@@ -1,0 +1,370 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Memory blocks are possibly lost (Valgrind example again!!) - swem's tech talk</title>
+  <meta name="author" content="swem">
+
+  
+  <meta name="description" content="今天讀到的文章 Using Valgrind to debug memory leaks 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+#include &lt;stdio.h&gt;
+# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">swem's tech talk</a></h1>
+  
+    <h2>keep hacking.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:swem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Memory Blocks Are Possibly Lost (Valgrind Example Again!!)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-25T09:47:00+08:00" pubdate data-updated="true">Dec 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>今天讀到的文章 <a href="http://www.linuxprogrammingblog.com/using-valgrind-to-debug-memory-leaks">Using Valgrind to debug memory leaks</a></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;stdio.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;string.h&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;ctype.h&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="o">*</span><span class="n">lower</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">char</span> <span class="o">*</span><span class="nf">to_lower</span> <span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">str</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">l</span> <span class="o">=</span> <span class="n">strdup</span> <span class="p">(</span><span class="n">str</span><span class="p">);</span>
+</span><span class='line'>  <span class="kt">char</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="n">c</span> <span class="o">=</span> <span class="n">l</span><span class="p">;</span> <span class="o">*</span><span class="n">c</span><span class="p">;</span> <span class="n">c</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">isupper</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">))</span>
+</span><span class='line'>          <span class="o">*</span><span class="n">c</span> <span class="o">=</span> <span class="n">tolower</span><span class="p">(</span><span class="o">*</span><span class="n">c</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="n">l</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="nf">main</span> <span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">lower</span> <span class="o">=</span> <span class="n">to_lower</span> <span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">lower</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">putchar</span> <span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">lower</span><span class="o">++</span><span class="p">));</span>
+</span><span class='line'>  <span class="n">puts</span> <span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>輸出訊息</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>==28578== 5 bytes in 1 blocks are possibly lost in loss record 1 of 1
+</span><span class='line'>==28578==    at 0x4025D2E: malloc (vg_replace_malloc.c:207)
+</span><span class='line'>==28578==    by 0x40D805F: strdup (in /lib/tls/i686/cmov/libc-2.8.90.so)
+</span><span class='line'>==28578==    by 0x8048504: to_lower (test2.c:9)
+</span><span class='line'>==28578==    by 0x804857F: main (test2.c:22)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This time memory is possibly lost. Why it&rsquo;s not sure? Because at the program exit time we didn&rsquo;t completely lost the pointer to the allocated memory, we&rsquo;ve only advanced it to print the lower string in a funny way. It&rsquo;s theoretically possible that we have a variable, a counter that tells us how much we&rsquo;ve advanced, so we could compute the pointer to the memory to free it.</p>
+
+<p>文章還提到了 Valgrind In practice. 很值得一看</p>
+
+<p>At the beginning of using Valgrind to debug my programs I used to think this way: It&rsquo;s just an automatic, dumb tool that tracks memory allocations and can be wrong. I looked at the code and there can be no memory leak at this point, it&rsquo;s one of the cases when Valgrind is wrong.. But I was wrong! After years of using it I can see that 99,9% of it&rsquo;s messages are right but it&rsquo;s often hard to see it in the code.</p>
+
+<p>One real world case was when I was writing a multi-threaded program that used libmysqlclient library and valgrind showed memory leaks in mysql_real_connect()/mysql_init(). It&rsquo;s clear from documentation that the memory allocated by the library when using those functions should be freed by mysql_close(). From the code it was clear that I do it properly: every created connection was closed. I even added a counter to the places when I create connection and destroy it and saw all connections were destroyed. I started to think that there is a memory leak in the libmysqlclient_r library (a thread-safe version) but when I separated the code (wrote a simple program that allocates conenctions and free them) Valgrind showed no errors. So there are no leaks in the library. If I had less believe in Valgrind I would give up at this moment, but I knew it&rsquo;s right. As I found out there is a special requirement by libmysqlclient_r, I just didn&rsquo;t read the documentation. If you are creating MYSQL objects in different threads the library automatically allocates per-thread global data, but to free them you must use mysql_thread_end(). It&rsquo;s not done</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">swem</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-25T09:47:00+08:00" pubdate data-updated="true">Dec 25<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/" data-via="" data-counturl="http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/12/17/valgrind-jian-cha-cheng-shi-ji-yi-ti-de-xiao-gong-ju/" title="Previous Post: Valgrind - 檢查程式記憶體的小工具">&laquo; Valgrind - 檢查程式記憶體的小工具</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/03/14/rip/" title="Next Post: RIP, Google Reader">RIP, Google Reader &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/toeic-preparation/">TOEIC Preparation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - swem -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'swemsoctopressblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/';
+        var disqus_url = 'http://swem.github.io/blog/2012/12/25/memory-blocks-are-possibly-lost-valgrind-example-again/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

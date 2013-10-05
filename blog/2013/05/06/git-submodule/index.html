@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>git submodule - swem's tech talk</title>
+  <meta name="author" content="swem">
+
+  
+  <meta name="description" content="我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
+(例如Web App 可能會想要引用 facebook-ios-sdk) 使用 git submodule 要先掌握2件事 git 使用 . &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://swem.github.io/blog/2013/05/06/git-submodule">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">swem's tech talk</a></h1>
+  
+    <h2>keep hacking.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:swem.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/about-me">About Me</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Git Submodule</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
+(例如Web App 可能會想要引用 <a href="http://github.com/facebook/facebook-ios-sdk">facebook-ios-sdk</a>)</p>
+
+<p>使用 git submodule 要先掌握2件事</p>
+
+<ol>
+<li>git 使用 .gitmodules 來對應小專案、函式庫於大專案中的資料夾位置。</li>
+<li>每個開發者可以自行管理要不要取出各個小專案，每個小專案的設定將被註冊在 .git/config</li>
+</ol>
+
+
+<h2>Add submodule</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add /path/to/library library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Check-out submodule</h2>
+
+<p>其它協同開發者在大專案中準備取出小專案前，需要先 init, 把小專案的路徑依 .gitmodule 的內容，註冊到自己的 .git/config (如此，git 才知道怎麼去取出、更新小專案)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之後就可以開始更新小專案了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或是加入 &mdash;recursive 參數，把小專案中的小專案也一併取出來</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update --recursive</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Remove submodule</h2>
+
+<p>移除 submodule 時，修改 .gitmodules 的內容，將欲刪除的 submodule 設定刪掉，並將大專案中的小專案資料夾刪去。再 commit 即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .gitmodules
+</span><span class='line'>vim .gitmodules
+</span><span class='line'># remove 
+</span><span class='line'>rm -rf library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<p>.git/config 內已註冊的小專案路徑，也可將它刪掉(非必要，但建議)。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .git/config
+</span><span class='line'>vim .git/config</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/">Git Submodules: Adding, Using, Removing, Updating</a></li>
+<li><a href="http://josephjiang.com/entry.php?id=342">Git Submodule 的認識與正確使用！</a></li>
+</ol>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">swem</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2013/05/06/git-submodule/" data-via="" data-counturl="http://swem.github.io/blog/2013/05/06/git-submodule/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/05/02/git-subtree-merge-strategy/" title="Previous Post: git subtree merge strategy">&laquo; git subtree merge strategy</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/05/09/file-descriptor-in-bash-shell/" title="Next Post: File Descriptor in Bash Shell">File Descriptor in Bash Shell &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/toeic-preparation/">TOEIC Preparation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - swem -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'swemsoctopressblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://swem.github.io/blog/2013/05/06/git-submodule/';
+        var disqus_url = 'http://swem.github.io/blog/2013/05/06/git-submodule/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
