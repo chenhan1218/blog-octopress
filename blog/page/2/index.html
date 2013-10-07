@@ -9,10 +9,8 @@
   <meta name="author" content="swem">
 
   
-  <meta name="description" content="最近工作上遇到一個問題，我們希望在自己的專案中保有專案所依賴的函式庫，而不隨著函式庫的版本更新而變動。例如我們也許想使用
-boost 1.5.3 做為我們的依賴函式庫，未來等 boost 改版到 1.6 以後，也許先不急著更換，等到時機恰當再做更換。 在專案中保有的函式庫，檔案結構如： 1
-2
-3 &hellip;">
+  <meta name="description" content="我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
+(例如Web App 可能會想要引用 facebook-ios-sdk) 使用 git submodule 要先掌握2件事 git 使用 . &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -69,6 +67,107 @@ boost 1.5.3 做為我們的依賴函式庫，未來等 boost 改版到 1.6 以�
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/05/06/git-submodule/">Git Submodule</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
+(例如Web App 可能會想要引用 <a href="http://github.com/facebook/facebook-ios-sdk">facebook-ios-sdk</a>)</p>
+
+<p>使用 git submodule 要先掌握2件事</p>
+
+<ol>
+<li>git 使用 .gitmodules 來對應小專案、函式庫於大專案中的資料夾位置。</li>
+<li>每個開發者可以自行管理要不要取出各個小專案，每個小專案的設定將被註冊在 .git/config</li>
+</ol>
+
+
+<h2>Add submodule</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add /path/to/library library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Check-out submodule</h2>
+
+<p>其它協同開發者在大專案中準備取出小專案前，需要先 init, 把小專案的路徑依 .gitmodule 的內容，註冊到自己的 .git/config (如此，git 才知道怎麼去取出、更新小專案)</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init</span></code></pre></td></tr></table></div></figure>
+
+
+<p>之後就可以開始更新小專案了。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update</span></code></pre></td></tr></table></div></figure>
+
+
+<p>或是加入 &mdash;recursive 參數，把小專案中的小專案也一併取出來</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update --recursive</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Remove submodule</h2>
+
+<p>移除 submodule 時，修改 .gitmodules 的內容，將欲刪除的 submodule 設定刪掉，並將大專案中的小專案資料夾刪去。再 commit 即可。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .gitmodules
+</span><span class='line'>vim .gitmodules
+</span><span class='line'># remove 
+</span><span class='line'>rm -rf library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
+
+
+<p>.git/config 內已註冊的小專案路徑，也可將它刪掉(非必要，但建議)。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .git/config
+</span><span class='line'>vim .git/config</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/">Git Submodules: Adding, Using, Removing, Updating</a></li>
+<li><a href="http://josephjiang.com/entry.php?id=342">Git Submodule 的認識與正確使用！</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -838,6 +937,10 @@ $valgrind ./a.out</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/">FastMail’s Servers Are in the US: What This Means for You</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/05/skype-supernode/">Skype Supernode</a>
       </li>
     
@@ -851,10 +954,6 @@ $valgrind ./a.out</p>
     
       <li class="post">
         <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/05/23/service-component/">雲端架構的構成要件</a>
       </li>
     
   </ul>

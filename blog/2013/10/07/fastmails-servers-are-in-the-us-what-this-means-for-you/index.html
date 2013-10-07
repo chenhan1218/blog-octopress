@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>git submodule - swem's tech talk</title>
+  <title>FastMail’s servers are in the US: what this means for you - swem's tech talk</title>
   <meta name="author" content="swem">
 
   
-  <meta name="description" content="我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
-(例如Web App 可能會想要引用 facebook-ios-sdk) 使用 git submodule 要先掌握2件事 git 使用 . &hellip;">
+  <meta name="description" content="想必是受到Lavabit被美國法院判決必須交出SSL private Key的影響，電子郵件服務商FastMail，今天在官方部落格上發表的文章，向使用者說明，FastMail位在美國的伺服器，對使用者來說有什麼潛在的風險。 首先，FastMail提到，他們是澳洲公司，遵守澳洲法律。 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://swem.github.io/blog/2013/05/06/git-submodule">
+  <link rel="canonical" href="http://swem.github.io/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="swem's tech talk" type="application/atom+xml">
@@ -70,7 +69,7 @@
   
   <header>
     
-      <h1 class="entry-title">Git Submodule</h1>
+      <h1 class="entry-title">FastMail’s Servers Are in the US: What This Means for You</h1>
     
     
       <p class="meta">
@@ -86,78 +85,29 @@
   
 
 
-<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-10-07T00:00:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
-(例如Web App 可能會想要引用 <a href="http://github.com/facebook/facebook-ios-sdk">facebook-ios-sdk</a>)</p>
+<div class="entry-content"><p>想必是受到<a href="http://lavabit.com/">Lavabit</a>被美國法院判決必須交出SSL private Key的影響，電子郵件服務商<a href="https://www.fastmail.fm/">FastMail</a>，今天在官方部落格上發表的文章，向使用者說明，FastMail位在美國的伺服器，對使用者來說有什麼潛在的風險。</p>
 
-<p>使用 git submodule 要先掌握2件事</p>
+<p>首先，FastMail提到，他們是澳洲公司，遵守澳洲法律。若澳洲法庭簽署了執行令，則他們必須對澳洲法律當局交出特定使用者的資料。然而，這一類的海外法律互助申請是極為少見的。因為申請方必須具備許多犯罪證明，而且也必須確定使用者的行為不只違反了所屬國家法律，也違反了澳洲法律。</p>
 
-<ol>
-<li>git 使用 .gitmodules 來對應小專案、函式庫於大專案中的資料夾位置。</li>
-<li>每個開發者可以自行管理要不要取出各個小專案，每個小專案的設定將被註冊在 .git/config</li>
-</ol>
+<p>曾有人表示由於FastMail的伺服器位在美國，所以也受到美國的管轄權。不過這樣的說法FastMail認為並不正確。FastMail並不具有任何美國法律身分，也沒有任何在美國的工作人員。因此即使美國法院簽署批淮令要求交出使用者資料，在澳洲隱私權法律的限制下，FastMail也不能這麼做。</p>
 
+<p>當然美國政府確實有可能向澳洲政府提出請求，但考慮到耗時且完全透明的過程等種種的障礙下，FastMail認為這樣的可能性很低。</p>
 
-<h2>Add submodule</h2>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule add /path/to/library library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Check-out submodule</h2>
-
-<p>其它協同開發者在大專案中準備取出小專案前，需要先 init, 把小專案的路徑依 .gitmodule 的內容，註冊到自己的 .git/config (如此，git 才知道怎麼去取出、更新小專案)</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule init</span></code></pre></td></tr></table></div></figure>
-
-
-<p>之後就可以開始更新小專案了。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update</span></code></pre></td></tr></table></div></figure>
-
-
-<p>或是加入 &mdash;recursive 參數，把小專案中的小專案也一併取出來</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>git submodule update --recursive</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Remove submodule</h2>
-
-<p>移除 submodule 時，修改 .gitmodules 的內容，將欲刪除的 submodule 設定刪掉，並將大專案中的小專案資料夾刪去。再 commit 即可。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .gitmodules
-</span><span class='line'>vim .gitmodules
-</span><span class='line'># remove 
-</span><span class='line'>rm -rf library/position/in/my_project</span></code></pre></td></tr></table></div></figure>
-
-
-<p>.git/config 內已註冊的小專案路徑，也可將它刪掉(非必要，但建議)。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'># use vim to edit .git/config
-</span><span class='line'>vim .git/config</span></code></pre></td></tr></table></div></figure>
-
+<p>我個人覺得Lavabit被要求交出SSL Private Key是美國法院對一般使用者資料滿嚴重的侵害。衡量 FastMail所述，在面對美國法院的批淮上，澳洲的服務商稍微能抵擋這類法律上的隱私侵害。</p>
 
 <p>Ref:</p>
 
-<ol>
-<li><a href="http://chrisjean.com/2009/04/20/git-submodules-adding-using-removing-and-updating/">Git Submodules: Adding, Using, Removing, Updating</a></li>
-<li><a href="http://josephjiang.com/entry.php?id=342">Git Submodule 的認識與正確使用！</a></li>
-</ol>
+<ul>
+<li><p><a href="http://blog.fastmail.fm/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/">FastMail’s servers are in the US: what this means for you</a></p></li>
+<li><p><a href="http://arstechnica.com/tech-policy/2013/10/lavabit-defied-order-for-snowdens-login-info-then-govt-asked-for-sites-ssl-key/">Lavabit got order for Snowden’s login info, then gov’t demanded site’s SSL key</a></p></li>
+</ul>
 
 </div>
 
@@ -181,7 +131,7 @@
   
 
 
-<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-10-07T00:00:00+08:00" pubdate data-updated="true">Oct 7<span>th</span>, 2013</time>
       
 
 
@@ -189,7 +139,7 @@
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2013/05/06/git-submodule/" data-via="" data-counturl="http://swem.github.io/blog/2013/05/06/git-submodule/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://swem.github.io/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/" data-via="" data-counturl="http://swem.github.io/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/" >Tweet</a>
   
   
   <div class="g-plusone" data-size="medium"></div>
@@ -202,10 +152,8 @@
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/05/02/git-subtree-merge-strategy/" title="Previous Post: git subtree merge strategy">&laquo; git subtree merge strategy</a>
+        <a class="basic-alignment left" href="/blog/2013/10/05/skype-supernode/" title="Previous Post: Skype Supernode">&laquo; Skype Supernode</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/05/09/file-descriptor-in-bash-shell/" title="Next Post: File Descriptor in Bash Shell">File Descriptor in Bash Shell &raquo;</a>
       
     </p>
   </footer>
@@ -271,8 +219,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://swem.github.io/blog/2013/05/06/git-submodule/';
-        var disqus_url = 'http://swem.github.io/blog/2013/05/06/git-submodule/';
+        var disqus_identifier = 'http://swem.github.io/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/';
+        var disqus_url = 'http://swem.github.io/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/';
         var disqus_script = 'embed.js';
       
     (function () {
