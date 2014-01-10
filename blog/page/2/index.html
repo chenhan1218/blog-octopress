@@ -9,8 +9,9 @@
   <meta name="author" content="swem">
 
   
-  <meta name="description" content="我們可以透過 git submodule 來組合眾多小專案、函式庫，形成一個大專案。這樣的流程特別常見於應用程式依賴於底層的Library時。
-(例如Web App 可能會想要引用 facebook-ios-sdk) 使用 git submodule 要先掌握2件事 git 使用 . &hellip;">
+  <meta name="description" content="一個程式至少會開啟三個Input/Output 串流，分別為 Standard input (stdin) 標準輸入
+Standard output (stdout) 標準輸出
+Standard error (stderr) 標準錯誤訊息 操作時相對應的代號就是file descriptor。 在 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -73,6 +74,79 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/05/09/file-descriptor-in-bash-shell/">File Descriptor in Bash Shell</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-09T00:00:00+08:00" pubdate data-updated="true">May 9<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>一個程式至少會開啟三個Input/Output 串流，分別為</p>
+
+<ol>
+<li>Standard input (stdin)  標準輸入</li>
+<li>Standard output (stdout) 標準輸出</li>
+<li>Standard error (stderr) 標準錯誤訊息</li>
+</ol>
+
+
+<p>操作時相對應的代號就是file descriptor。</p>
+
+<p>在 Bash Shell 中，你最多可以有10個 file descriptor。利用這些 descriptor，你可以結合他們把輸出訊息、錯誤訊息，都導到同一個檔案中，並同時在螢幕上顯示出來。</p>
+
+<h2>I/O redirection 的順序性</h2>
+
+<p>在進行 I/O redirection 的時候，要注意順序性 (If redirecting both stdout and stderr, the order of the commands makes a difference.)。
+以下2個命令是不同的。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sh script.sh &gt;log.txt 2&gt;&1
+</span><span class='line'>$ sh script.sh 2&gt;&1 &gt;log.txt</span></code></pre></td></tr></table></div></figure>
+
+
+<p>-第1個命令，將stdout 導向 log.txt，然後stderr 導向 stdout。如此一來，stderr 也將導入 log.txt。
+-第2個命令，將stderr 導向 stdout，然後原先的stdout 導向 log.txt。此時log.txt 只會包含 stdout</p>
+
+<p>進階應用的話可以參考 Fourdollars 的文章<a href="http://fourdollars.blogspot.tw/2013/03/bash-redirection.html">關於 Bash 的 Redirection 使用的心得</a>。
+裡面提到了如何將標準輸出訊息跟標準錯誤訊息都導進 fdisk.log 裡面，然後將標準錯誤訊息顯示出來。</p>
+
+<p>Ref:</p>
+
+<ol>
+<li><a href="http://fourdollars.blogspot.tw/2013/03/bash-redirection.html">關於 Bash 的 Redirection 使用的心得</a></li>
+<li><a href="http://www.study-area.org/cyril/scripts/scripts/node32.html">File descriptor與I/O導向</a></li>
+<li><a href="http://www.tldp.org/LDP/abs/html/io-redirection.html">Advanced Bash-Scripting Guide: Chapter 20. I/O Redirection</a></li>
+</ol>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/05/06/git-submodule/">Git Submodule</a></h1>
     
     
@@ -89,7 +163,7 @@
   
 
 
-<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-05-06T00:00:00+08:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -190,7 +264,7 @@
   
 
 
-<time datetime="2013-05-02T00:00:00+08:00" pubdate data-updated="true">May 2<span>nd</span>, 2013</time>
+<time datetime="2013-05-02T00:00:00+08:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -279,7 +353,7 @@
   
 
 
-<time datetime="2013-04-25T00:00:00+08:00" pubdate data-updated="true">Apr 25<span>th</span>, 2013</time>
+<time datetime="2013-04-25T00:00:00+08:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -355,7 +429,7 @@
   
 
 
-<time datetime="2013-04-24T00:00:00+08:00" pubdate data-updated="true">Apr 24<span>th</span>, 2013</time>
+<time datetime="2013-04-24T00:00:00+08:00" pubdate data-updated="true"></time>
         
       </p>
     
@@ -708,7 +782,7 @@ Feedly 這項服務提供 Google Reader 使用者連結自己所訂閱的 RSS,
 
   <div class="entry-content"><p>今天讀到的文章 <a href="http://www.linuxprogrammingblog.com/using-valgrind-to-debug-memory-leaks">Using Valgrind to debug memory leaks</a></p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -834,7 +908,7 @@ Feedly 這項服務提供 Google Reader 使用者連結自己所訂閱的 RSS,
 
 <p>小範例，由 Valgrind 找出 test.cpp 第8行的 Bug  ( Invalid read )</p>
 
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -937,6 +1011,10 @@ $valgrind ./a.out</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/01/10/move-to-logdown/">Move to Logdown</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/10/07/fastmails-servers-are-in-the-us-what-this-means-for-you/">FastMail’s Servers Are in the US: What This Means for You</a>
       </li>
     
@@ -952,10 +1030,6 @@ $valgrind ./a.out</p>
         <a href="/blog/2013/05/27/software-community-meeting-in-taiwan/">Software Community Meeting in Taiwan</a>
       </li>
     
-      <li class="post">
-        <a href="/blog/2013/05/27/install-rvm/">Install RVM, Ruby and Gems Without Sudo Permission</a>
-      </li>
-    
   </ul>
 </section>
 
@@ -969,7 +1043,7 @@ $valgrind ./a.out</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - swem -
+  Copyright &copy; 2014 - swem -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
